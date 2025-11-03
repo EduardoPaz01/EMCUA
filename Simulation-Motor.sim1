@@ -1,0 +1,87 @@
+<circuit version="1.1.0-SR1" rev="2005" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
+
+<item itemtype="MCU" CircId="mega328PB-2" mainComp="false" Show_id="true" Show_Val="false" Pos="56,-296" rotation="0" hflip="1" vflip="1" label="mega328PB-2" idLabPos="11.2571,-31.2571" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Auto_Load="false" saveEepr="true" Ext_Osc="false" Wdt_enabled="false" Clk_Out="false" MainMcu="true" SerialMon="-1" />
+
+<item itemtype="BJT" CircId="BJT-6" mainComp="false" Show_id="false" Show_Val="false" Pos="36,-12" rotation="0" hflip="1" vflip="1" label="BJT-6" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
+
+<item itemtype="BJT" CircId="BJT-7" mainComp="false" Show_id="false" Show_Val="false" Pos="36,-96" rotation="0" hflip="1" vflip="1" label="BJT-7" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="true" Gain="100" Vcrit="0.670736 V" />
+
+<item itemtype="BJT" CircId="BJT-8" mainComp="false" Show_id="false" Show_Val="false" Pos="164,-8" rotation="180" hflip="1" vflip="1" label="BJT-8" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="true" Gain="100" Vcrit="0.670736 V" />
+
+<item itemtype="BJT" CircId="BJT-9" mainComp="false" Show_id="false" Show_Val="false" Pos="164,-96" rotation="180" hflip="1" vflip="1" label="BJT-9" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
+
+<item itemtype="Fixed Voltage" CircId="Fixed Voltage-10" mainComp="false" ShowProp="Voltage" Show_id="false" Show_Val="true" Pos="44,-144" rotation="90" hflip="1" vflip="1" label="Fixed Voltage-10" idLabPos="-64,-24" labelrot="0" valLabPos="-16,8" valLabRot="0" Voltage="12 V" Out="true" />
+
+<item itemtype="Fixed Voltage" CircId="Fixed Voltage-11" mainComp="false" ShowProp="Voltage" Show_id="false" Show_Val="true" Pos="156,-144" rotation="90" hflip="1" vflip="1" label="Fixed Voltage-11" idLabPos="-64,-24" labelrot="0" valLabPos="-16,8" valLabRot="0" Voltage="12 V" Out="true" />
+
+<item itemtype="Ground" CircId="Ground-15" mainComp="false" Show_id="false" Show_Val="false" Pos="44,32" rotation="0" hflip="1" vflip="1" label="Ground-15" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+
+<item itemtype="Ground" CircId="Ground-16" mainComp="false" Show_id="false" Show_Val="false" Pos="156,36" rotation="0" hflip="1" vflip="1" label="Ground-16" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+
+<item itemtype="Resistor" CircId="Resistor-17" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="-8,-96" rotation="0" hflip="1" vflip="1" label="Resistor-17" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-18" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="208,-96" rotation="0" hflip="1" vflip="1" label="Resistor-18" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-19" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="-8,-12" rotation="0" hflip="1" vflip="1" label="Resistor-19" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Resistor" CircId="Resistor-20" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="208,-8" rotation="0" hflip="1" vflip="1" label="Resistor-20" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
+
+<item itemtype="Oscope" CircId="Oscope-29" mainComp="false" Show_id="false" Show_Val="false" Pos="392,-256" rotation="0" hflip="1" vflip="1" label="Oscope-29" idLabPos="-90,-100" labelrot="0" valLabPos="-16,20" valLabRot="0" Basic_X="135 _px" Basic_Y="135 _px" BufferSize="600000" connectGnd="true" InputImped="10 MΩ" TimDiv="160000000000" TimPos="0,0,0,0," VolDiv="1,0.499998,0.499998,1," Tunnels=",,,," Trigger="2" Filter="0.1 V" AutoSC="4" Tracks="4" HideCh="false,false,false,false," VolPos="0,-2.49999,-2.49999,0," />
+
+<item itemtype="KY040" CircId="KY040-32" mainComp="false" ShowProp="Steps" Show_id="false" Show_Val="true" Pos="236,-276" rotation="-630" hflip="-1" vflip="-1" label="KY040-32" idLabPos="-34,20" labelrot="-90" valLabPos="-16,20" valLabRot="0" Steps="1" />
+
+<item itemtype="DcMotor" CircId="DcMotor-33" mainComp="false" Show_id="true" Show_Val="false" Pos="100,-48" rotation="0" hflip="1" vflip="1" label="DcMotor-33" idLabPos="-21.9513,36.2009" labelrot="0" valLabPos="0,0" valLabRot="0" Links="DcMotor-33,KY040-32," RPM_Nominal="60 _RPM" Volt_Nominal="12 V" Resistance="100 Ω" />
+
+<item itemtype="Node" CircId="Node-13" mainComp="false" Pos="44,-48" />
+
+<item itemtype="Node" CircId="Node-14" mainComp="false" Pos="156,-48" />
+
+<item itemtype="Node" CircId="Node-22" mainComp="false" Pos="240,-52" />
+
+<item itemtype="Node" CircId="Node-21" mainComp="false" Pos="-40,-56" />
+
+<item itemtype="Connector" uid="Connector-4" startpinid="Fixed Voltage-11-outnod" endpinid="BJT-9-emiter" pointList="156,-128,156,-112" />
+
+<item itemtype="Connector" uid="Connector-6" startpinid="BJT-7-emiter" endpinid="Node-13-0" pointList="44,-80,44,-48" />
+
+<item itemtype="Connector" uid="Connector-7" startpinid="Node-13-2" endpinid="BJT-6-collector" pointList="44,-48,44,-28" />
+
+<item itemtype="Connector" uid="Connector-9" startpinid="BJT-9-collector" endpinid="Node-14-0" pointList="156,-80,156,-48" />
+
+<item itemtype="Connector" uid="Connector-10" startpinid="Node-14-2" endpinid="BJT-8-emiter" pointList="156,-48,156,-24" />
+
+<item itemtype="Connector" uid="Connector-12" startpinid="BJT-6-emiter" endpinid="Ground-15-Gnd" pointList="44,4,44,16" />
+
+<item itemtype="Connector" uid="Connector-14" startpinid="Resistor-17-rPin" endpinid="BJT-7-base" pointList="8,-96,20,-96" />
+
+<item itemtype="Connector" uid="Connector-15" startpinid="Resistor-19-rPin" endpinid="BJT-6-base" pointList="8,-12,20,-12" />
+
+<item itemtype="Connector" uid="Connector-16" startpinid="BJT-9-base" endpinid="Resistor-18-lPin" pointList="180,-96,192,-96" />
+
+<item itemtype="Connector" uid="Connector-17" startpinid="BJT-8-base" endpinid="Resistor-20-lPin" pointList="180,-8,192,-8" />
+
+<item itemtype="Connector" uid="Connector-22" startpinid="mega328PB-2-PORTD6" endpinid="Node-22-1" pointList="80,-200,80,-188,272,-188,272,-52,240,-52" />
+
+<item itemtype="Connector" uid="Connector-23" startpinid="Resistor-18-rPin" endpinid="Node-22-0" pointList="224,-96,240,-96,240,-52" />
+
+<item itemtype="Connector" uid="Connector-24" startpinid="Node-22-2" endpinid="Resistor-20-rPin" pointList="240,-52,240,-8,224,-8" />
+
+<item itemtype="Connector" uid="Connector-21" startpinid="Node-21-2" endpinid="Resistor-19-lPin" pointList="-40,-56,-40,-12,-24,-12" />
+
+<item itemtype="Connector" uid="Connector-20" startpinid="Resistor-17-lPin" endpinid="Node-21-0" pointList="-24,-96,-40,-96,-40,-56" />
+
+<item itemtype="Connector" uid="Connector-19" startpinid="mega328PB-2-PORTD5" endpinid="Node-21-1" pointList="72,-200,72,-188,-64,-188,-64,-56,-40,-56" />
+
+<item itemtype="Connector" uid="Connector-58" startpinid="KY040-32-clk" endpinid="Oscope-29-Pin0" pointList="272,-280,284,-280,284,-304,304,-304" />
+
+<item itemtype="Connector" uid="Connector-60" startpinid="KY040-32-dt" endpinid="Oscope-29-Pin1" pointList="272,-272,304,-272" />
+
+<item itemtype="Connector" uid="Connector-61" startpinid="Fixed Voltage-10-outnod" endpinid="BJT-7-collector" pointList="44,-128,44,-112" />
+
+<item itemtype="Connector" uid="Connector-62" startpinid="DcMotor-33-lPin" endpinid="Node-13-1" pointList="60,-48,44,-48" />
+
+<item itemtype="Connector" uid="Connector-63" startpinid="BJT-8-collector" endpinid="Ground-16-Gnd" pointList="156,8,156,20" />
+
+<item itemtype="Connector" uid="Connector-64" startpinid="DcMotor-33-rPin" endpinid="Node-14-1" pointList="140,-48,156,-48" />
+
+</circuit>
