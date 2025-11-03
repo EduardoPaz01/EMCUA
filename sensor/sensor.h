@@ -1,7 +1,6 @@
 #ifndef SENSOR_H_
 #define SENSOR_H_
 
-#include "../EMCUA.h"
 #include <avr/io.h>
 #include <util/delay.h>
 

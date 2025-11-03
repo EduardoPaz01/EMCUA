@@ -7,4 +7,8 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
+#include "sensor/sensor.h"
+#include "motor/motor.h"
+
+
 #endif /* EMCUA_H_ */

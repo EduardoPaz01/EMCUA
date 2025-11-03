@@ -1,7 +1,6 @@
 #ifndef MOTOR_CONTROLLER_H_
 #define MOTOR_CONTROLLER_H_
 
-#include "../EMCUA.h"
 #include <avr/io.h>
 #include <util/delay.h>
 
