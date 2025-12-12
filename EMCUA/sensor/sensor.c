@@ -41,3 +41,13 @@ uint16_t adcRead(void) {
   while (ADCSRA & (1 << ADSC));
   return ADC;
 }
+
+//util 
+
+unsigned long periodToRPM(unsigned long period_ms) {
+  if (period_ms == 0) return 0; // evita divisão por zero
+  double freq = 1000.0 / (double)period_ms;   // Hz
+  double rpm  = freq * 60.0;                  // RPM
+  return (unsigned long)rpm;
+}
+
