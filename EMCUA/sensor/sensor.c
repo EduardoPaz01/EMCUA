@@ -51,3 +51,75 @@ unsigned long periodToRPM(unsigned long period_ms) {
   return (unsigned long)rpm;
 }
 
+
+// temporary 
+
+void uartInit(unsigned long baud) {
+  unsigned int ubrr = F_CPU/16/baud - 1;
+
+  // Configura baud rate
+  UBRR0H = (unsigned char)(ubrr >> 8);
+  UBRR0L = (unsigned char)ubrr;
+
+  // Habilita transmissão
+  UCSR0B = (1 << TXEN0);
+
+  // Frame format: 8 data bits, 1 stop bit, sem paridade (8N1)
+  UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+}
+
+void uartSendChar(char c) {
+  while (!(UCSR0A & (1 << UDRE0)));
+  UDR0 = c;
+}
+
+void uartSendInt(uint16_t value) {
+  char buf[6];
+  int i = 0;
+
+  do {
+    buf[i++] = (value % 10) + '0';
+    value /= 10;
+  } while (value > 0);
+
+  while (i > 0) {
+    uartSendChar(buf[--i]);
+  }
+
+  uartSendChar('\r');
+  uartSendChar('\n');
+}
+
+void sensorReadAndSend(void) {
+  ADCSRA |= (1 << ADSC);            // Inicia conversão
+  while (ADCSRA & (1 << ADSC));     // Espera terminar
+  uint16_t adcValue = ADC;          // Lê resultado
+  uartSendInt(adcValue);            // Envia pela serial
+}
+
+ISR(TIMER0_COMPA_vect) {
+  g_millis++;
+}
+
+void millisInit(void) {
+  // Timer0 em modo CTC, interrupção a cada 1ms
+  TCCR0A = (1 << WGM01);
+  TCCR0B = (1 << CS01) | (1 << CS00); // prescaler 64
+  OCR0A = (F_CPU / 64 / 1000) - 1;    // 1ms
+  TIMSK0 = (1 << OCIE0A);
+  sei();
+}
+
+unsigned long millis(void) {
+  unsigned long m;
+  cli();
+  m = g_millis;
+  sei();
+  return m;
+}
+
+void resetMillis(void) {
+  cli();
+  g_millis = 0;
+  sei();
+}
