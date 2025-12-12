@@ -29,3 +29,15 @@ void sensorInit(void) {
   g_sensor.led_state = 0;
   g_sensor.debouncing = 0;
 }
+
+void adcInit(void) {
+  ADMUX = (1 << REFS0) | (ADC_CHANNEL & 0x0F);
+  ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1); // prescaler 64
+  DIDR0 = (1 << ADC_CHANNEL);
+}
+
+uint16_t adcRead(void) {
+  ADCSRA |= (1 << ADSC);
+  while (ADCSRA & (1 << ADSC));
+  return ADC;
+}
