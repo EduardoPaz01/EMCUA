@@ -57,3 +57,38 @@ void pwmInit(void){
   /* Inicialmente 0% duty */
   OCR2B = 0;
 }
+
+void applyPWM(int8_t direction, uint8_t duty){
+  if (duty > 100) duty = 100;
+  uint8_t value = (uint8_t)((duty * 255UL) / 100UL);
+
+  /* Opcional: proteger modificações de registros (não obrigatório
+      mas evita corrupção se estiver em ISR) */
+  uint8_t sreg = SREG;
+  cli();
+
+  if (direction == 1) {
+    /* Habilita OC2B (non-inverting) e desconecta OC0B */
+    TCCR2A = (TCCR2A & ~((1<<COM2B1)|(1<<COM2B0))) | (1<<COM2B1); /* OC2B non-inverting */
+    TCCR0A &= ~((1<<COM0B1)|(1<<COM0B0));                         /* desconecta OC0B */
+
+    OCR2B = value;
+    OCR0B = 0;
+  }
+  else if (direction == -1) {
+    /* Habilita OC0B (non-inverting) e desconecta OC2B */
+    TCCR0A = (TCCR0A & ~((1<<COM0B1)|(1<<COM0B0))) | (1<<COM0B1); /* OC0B non-inverting */
+    TCCR2A &= ~((1<<COM2B1)|(1<<COM2B0));                         /* desconecta OC2B */
+
+    OCR0B = value;
+    OCR2B = 0;
+  }
+  else {
+    /* direction == 0 -> desligar ambos */
+    TCCR0A &= ~((1<<COM0B1)|(1<<COM0B0));
+    TCCR2A &= ~((1<<COM2B1)|(1<<COM2B0));
+    OCR0B = OCR2B = 0;
+  }
+
+  SREG = sreg; /* restaura flags */
+}
