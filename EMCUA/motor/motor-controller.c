@@ -92,3 +92,12 @@ void applyPWM(int8_t direction, uint8_t duty){
 
   SREG = sreg; /* restaura flags */
 }
+
+uint8_t voltageToDuty(float voltage){
+  if(voltage > 12.0) voltage = 12.0;
+  if(voltage < -12.0) voltage = -12.0;
+
+  // Duty cycle proporcional (0-255)
+  float duty = (fabs(voltage) / 12.0) * 255.0;
+  return (uint8_t)duty;
+}
