@@ -11,17 +11,17 @@
 #include "motor/motor-controller.h"
 
 // ADC Configuration
-#define ADC_CHANNEL 0  // ADC0 on PORTC0
-#define ADC_REFERENCE REFS0  // AVCC with external capacitor at AREF pin
+//#define ADC_CHANNEL 0  // ADC0 on PORTC0
+//#define ADC_REFERENCE REFS0  // AVCC with external capacitor at AREF pin
 
 // Timer Configuration
-#define TIMER1_PRESCALER 64
-#define TIMER1_TOP 24999  // For 10ms interval at 16MHz
+//#define TIMER1_PRESCALER 64
+//#define TIMER1_TOP 24999  // For 10ms interval at 16MHz
 
 // PWM Configuration
-#define PWM_PIN1 PB1  // OC1A
-#define PWM_PIN2 PB2  // OC1B
-#define PWM_TOP 255   // 8-bit PWM resolution
+//#define PWM_PIN1 PB1  // OC1A
+//#define PWM_PIN2 PB2  // OC1B
+//#define PWM_TOP 255   // 8-bit PWM resolution
 
 
 // Global variables declarations

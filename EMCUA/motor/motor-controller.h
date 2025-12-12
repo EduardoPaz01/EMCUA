@@ -19,6 +19,8 @@ void motorInit(void);
 
 void motorWrite(int8_t direction, uint8_t powerMode);
 
+void pwmInit(void);
+
 void applyPWM(int8_t direction, uint8_t duty);
 
 uint8_t voltageToDuty(float voltage);
