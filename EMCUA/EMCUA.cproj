@@ -100,6 +100,12 @@
     <Compile Include="motor\motor-controller.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ihm\LCD.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ihm\LCD.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="motor\motor-controller.h">
       <SubType>compile</SubType>
     </Compile>
@@ -113,6 +119,7 @@
   <ItemGroup>
     <Folder Include="motor" />
     <Folder Include="sensor" />
+    <Folder Include="ihm" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

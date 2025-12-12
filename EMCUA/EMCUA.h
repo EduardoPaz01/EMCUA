@@ -10,6 +10,8 @@
 #include "sensor/sensor.h"
 #include "motor/motor-controller.h"
 
+#include "ihm/LCD.h"
+
 // ADC Configuration
 //#define ADC_CHANNEL 0  // ADC0 on PORTC0
 //#define ADC_REFERENCE REFS0  // AVCC with external capacitor at AREF pin

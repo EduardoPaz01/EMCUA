@@ -1,7 +1,10 @@
-#pragma once
+#ifndef LCD_H_
+#define LCD_H_
 
-#include <stdint.h>
-#include <xc.h>
+#define F_CPU 16000000UL
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
 
 /**
  * Sends a instruction or character to the Display 
@@ -35,11 +38,13 @@ void send_LCD_label_value(char * label, uint16_t value, uint8_t line);
  * 
  * 
  */
-void clear_LCD();
+void clear_LCD(void);
 
 /**
  * Sets pins on the atmega 328p as write and sends and does the initial configuration of
  * the display via instruction messages
  * 
  */
-void setup_LCD_serial_COM();
+void setup_LCD_serial_COM(void);
+
+#endif /* LCD_H_ */

@@ -6,5 +6,7 @@ main.c
 
 motor\motor-controller.c
 
+ihm\LCD.c
+
 sensor\sensor.c
 

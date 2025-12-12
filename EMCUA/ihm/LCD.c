@@ -1,6 +1,4 @@
-#include <EMCUA_LCD.h>
-
-#pragma once
+#include "LCD.h"
 
 void send_LCD_message(uint8_t data, uint8_t RS)
 {
