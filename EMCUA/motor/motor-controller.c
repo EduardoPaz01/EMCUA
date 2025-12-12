@@ -101,3 +101,19 @@ uint8_t voltageToDuty(float voltage){
   float duty = (fabs(voltage) / 12.0) * 255.0;
   return (uint8_t)duty;
 }
+
+void motorRamp(float v_init, float v_target, uint16_t accel_time_ms){
+  int steps = accel_time_ms / PERIOD_MS;
+  float slope = (v_target - v_init) / steps;
+  float v_current = v_init;
+
+  for(int i=0; i<=steps; i++){
+    int8_t direction = (v_current >= 0) ? 1 : -1;
+    uint8_t duty = voltageToDuty(v_current);
+
+    applyPWM(direction, duty);
+
+    v_current += slope;
+    _delay_ms(PERIOD_MS);
+  }
+}
