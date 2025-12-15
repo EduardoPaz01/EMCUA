@@ -65,7 +65,8 @@ void pwmInit(void){
   OCR2B = 0;
 }
 void applyPWM(int8_t direction, uint8_t duty){
-  if (duty > 100) duty = 100;
+  if (duty > DUTY_MAX) duty = DUTY_MAX;
+  if (duty < DUTY_MIN) duty = DUTY_MIN;
   uint8_t value = (uint8_t)((duty * 255UL) / 100UL);
 
   uint8_t sreg = SREG;
