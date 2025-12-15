@@ -17,8 +17,9 @@
  * @name Response codes
  * @brief Return values from `parseCommand` indicating response type.
  */
-#define MA_RESPONSE 0
-#define MF_RESPONSE 1
+ #define DEFAULT_RESPONSE 0
+#define MA_RESPONSE 1
+#define MF_RESPONSE 2
 
 /**
  * @brief Initialize UART peripheral at given baud rate.

@@ -45,6 +45,10 @@ uint8_t parseCommand(char *cmd){
     retorno = MA_RESPONSE;
   }
 
+  else {
+    retorno = DEFAULT_RESPONSE;
+  }
+
   return retorno;
 }
 

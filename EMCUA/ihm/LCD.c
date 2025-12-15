@@ -22,17 +22,16 @@ void send_LCD_message(uint8_t data, uint8_t RS){
 
 void send_LCD_text(char * text, uint8_t size, uint8_t line){ // sends array of characters to selected line on display
 
-	send_LCD_message(0x02, 0); 
-	/*switch (line)
-	{
+	//send_LCD_message(0x02, 0); 
+	switch (line){
 		case 1:
-			send_LCD_message(0x80, 0); // sets cursor at the start of the first line
+			send_LCD_message(0x02, 0); // sets cursor at the start of the first line
 		break;
 		
 		case 2:
-			send_LCD_message(0x80, 0); // sets cursor at the start of the second line
+			send_LCD_message(0xC0, 0); // sets cursor at the start of the second line
 		break;	
-	}*/
+	}
 	
 	for(uint8_t i = 0; i < size; i++){
 		send_LCD_message((text[i]),1);

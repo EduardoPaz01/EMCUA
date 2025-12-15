@@ -11,6 +11,8 @@ float e_prev = 0.0f;
 uint8_t logIndex = 0;
 uint16_t rpm_ref = 400;
 
+uint8_t duty = 0;
+
 // GENERAL
 void motorInit(void){
   DDRD = 0UL
@@ -64,7 +66,8 @@ void pwmInit(void){
   // 0% duty
   OCR2B = 0;
 }
-void applyPWM(int8_t direction, uint8_t duty){
+void applyPWM(int8_t direction, uint8_t duty_){
+  duty = duty_;
   if (duty > DUTY_MAX) duty = DUTY_MAX;
   if (duty < DUTY_MIN) duty = DUTY_MIN;
   uint8_t value = (uint8_t)((duty * 255UL) / 100UL);
@@ -163,4 +166,8 @@ void storeValues(unsigned long rpm, uint8_t duty){
 
 void setRPM_REF(uint16_t ref){
   rpm_ref = ref;
+}
+
+uint8_t getDuty(void){
+  return duty;
 }

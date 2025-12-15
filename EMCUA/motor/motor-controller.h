@@ -166,6 +166,11 @@ void sendLog(void);
  */
 void setRPM_REF(uint16_t ref);
 
+/**
+ *
+ */
+uint8_t getDuty(void);
+
 // G(s)= 11,87 / 0,054s+1
 // G(z)= 7,17​​  / z−0,396
 // y[k] = 0,396y[k−1] + 7,17u[k−1]
