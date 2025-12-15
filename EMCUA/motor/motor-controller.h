@@ -167,7 +167,14 @@ void sendLog(void);
 void setRPM_REF(uint16_t ref);
 
 /**
+ * Retrieve the last applied duty cycle.
  *
+ * Returns the most recent duty cycle command applied to the motor
+ * (as a percentage between 0 and 100). Useful for monitoring or
+ * debugging the closed-loop controller state.
+ *
+ * @function getDuty
+ * @returns {uint8_t} Last duty cycle percentage (0-100).
  */
 uint8_t getDuty(void);
 
