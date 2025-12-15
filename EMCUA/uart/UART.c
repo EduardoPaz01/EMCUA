@@ -48,19 +48,23 @@ uint8_t parseCommand(char *cmd){
   return retorno;
 }
 
-void uartCommandTask(void){
+uint8_t uartCommandTask(void){
+  uint8_t retorno = 0;
+
   if (UCSR0A & (1 << RXC0)) {
     char c = uartReadChar();
 
     if (c == '\n' || c == '\r') {
       cmdBuffer[cmdIndex] = '\0';
       cmdIndex = 0;
-      parseCommand(cmdBuffer);
+      retorno = parseCommand(cmdBuffer);
     } 
     else if (cmdIndex < CMD_BUF_SIZE - 1) {
       cmdBuffer[cmdIndex++] = c;
     }
   }
+
+  return retorno;
 }
 
 void uartInit(unsigned long baud) {

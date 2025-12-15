@@ -59,7 +59,8 @@ uint8_t parseCommand(char *cmd);
 /**
  * @brief Polling task that accumulates incoming characters into a buffer
  * and dispatches complete lines to `parseCommand` when CR or LF is received.
+ * * @return One of `MA_RESPONSE` or `MF_RESPONSE` indicating response category.
  */
-void uartCommandTask(void);
+uint8_t uartCommandTask(void);
 
 #endif /* UART_H_ */
