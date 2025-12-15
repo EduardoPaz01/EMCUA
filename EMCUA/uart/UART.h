@@ -64,4 +64,9 @@ uint8_t parseCommand(char *cmd);
  */
 uint8_t uartCommandTask(void);
 
+/**
+ *
+ */
+void uartSendString(const char *s);
+
 #endif /* UART_H_ */

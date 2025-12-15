@@ -4,6 +4,13 @@
 char cmdBuffer[CMD_BUF_SIZE];
 uint8_t cmdIndex = 0;
 
+void uartSendString(const char *s){
+  while(s && *s){
+    uartSendChar(*s++);
+  }
+  uartSendChar('\r');
+  uartSendChar('\n');
+}
 uint8_t parseCommand(char *cmd){
   uint8_t retorno = 0;
 
@@ -20,6 +27,7 @@ uint8_t parseCommand(char *cmd){
         memcpy(tmp, p, 4);
         tmp[4] = '\0';
         setRPM_REF( atoi(tmp) );
+        uartSendString("MF RPM SET!");
       }
     }
     retorno = MF_RESPONSE;
@@ -39,6 +47,7 @@ uint8_t parseCommand(char *cmd){
         memcpy(tmp, p, len);
         tmp[len] = '\0';
         setGAIN(atoi(tmp));
+        uartSendString("MF GAIN SET!");
       }
     }
     retorno = MF_RESPONSE;
@@ -46,7 +55,7 @@ uint8_t parseCommand(char *cmd){
 
   // SDO.12 -> set duty cycle reference to 12
   // Accept 1 to 2 digits after the dot (e.g., SDO.0 .. SDO.10)
-  else if(strncmp(cmd, "SDO.", 4) == 0){ // Set Duty-cycle in Open-loop
+  else if(strncmp(cmd, "SDO.", 4) == 0){ // Set Duty-cycle reference
     char *p = &cmd[4];
     size_t len = strlen(p);
     if (len >= 1 && len <= 2) {
@@ -59,6 +68,7 @@ uint8_t parseCommand(char *cmd){
         memcpy(tmp, p, len);
         tmp[len] = '\0';
         setPWM_Ref(atoi(tmp));
+        uartSendString("MA DUTY CICLE SET!");
       }
     }
     retorno = MA_RESPONSE;
@@ -66,7 +76,7 @@ uint8_t parseCommand(char *cmd){
 
   // SDS.12 -> set duty cycle step to 12
   // Accept 1 to 2 digits after the dot (e.g., SDO.0 .. SDO.10)
-  else if(strncmp(cmd, "SDS.", 4) == 0){ // Set Duty-cycle in Open-loop
+  else if(strncmp(cmd, "SDS.", 4) == 0){ // Set Duty-cycle step in Open-loop
     char *p = &cmd[4];
     size_t len = strlen(p);
     if (len >= 1 && len <= 2) {
@@ -79,6 +89,7 @@ uint8_t parseCommand(char *cmd){
         memcpy(tmp, p, len);
         tmp[len] = '\0';
         setStepPWM(atoi(tmp));
+        uartSendString("MA DUTY CICLE STEP SET!");
       }
     }
     retorno = MA_RESPONSE;

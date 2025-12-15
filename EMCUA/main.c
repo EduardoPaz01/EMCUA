@@ -20,6 +20,8 @@ int main(void){
   char MA [16] = "MA   -  DT:     ";
   char MF [16] = "MF   -  DT:     ";
   char GR [16] = "SPEED:          "; // General 
+
+  uartSendString("SISTEM INIT");
   
   uint8_t CL = 0;
   uint8_t OL = 1;
@@ -46,20 +48,16 @@ int main(void){
         if(OL){ // Open-loop control
           applyPWM_Ref();
           duty = getDuty();
-          //uartSendInt(duty);
           send_LCD_label_value(MA, duty, 1);
         }
         else if(CL){ // Closed-loop control
           duty = applyControl(rpm);
           applyPWM(1, duty);
           storeValues(rpm, duty);
-          //uartSendInt(duty);
           send_LCD_label_value(MF, (uint16_t)duty, 1);
         }
         
         send_LCD_label_value(GR, rpm, 2);
-
-        //uartSendInt(rpm);
 
         resetMillis();
       }
