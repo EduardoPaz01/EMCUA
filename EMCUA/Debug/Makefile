@@ -35,7 +35,8 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../motor \
 ../sensor \
-../ihm
+../ihm \
+../uart/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -43,7 +44,8 @@ C_SRCS +=  \
 ../main.c \
 ../motor/motor-controller.c \
 ../ihm/LCD.c \
-../sensor/sensor.c
+../sensor/sensor.c \
+../uart/UART.c
 
 
 PREPROCESSING_SRCS += 
@@ -56,25 +58,29 @@ OBJS +=  \
 main.o \
 motor/motor-controller.o \
 ihm/LCD.o \
-sensor/sensor.o
+sensor/sensor.o \
+uart/UART.o
 
 OBJS_AS_ARGS +=  \
 main.o \
 motor/motor-controller.o \
 ihm/LCD.o \
-sensor/sensor.o
+sensor/sensor.o \
+uart/UART.o
 
 C_DEPS +=  \
 main.d \
 motor/motor-controller.d \
 ihm/LCD.d \
-sensor/sensor.d
+sensor/sensor.d \
+uart/UART.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
 motor/motor-controller.d \
 ihm/LCD.d \
-sensor/sensor.d
+sensor/sensor.d \
+uart/UART.d
 
 OUTPUT_FILE_PATH +=EMCUA.elf
 
@@ -112,6 +118,13 @@ ihm/LCD.o: ../ihm/LCD.c
 	
 
 sensor/sensor.o: ../sensor/sensor.c
+	@echo Building file: $<
+	@echo Invoking: XC8 C Compiler : 2.36
+	$(QUOTE)C:\Program Files (x86)\Microchip\xc8\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega328P  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega328P__ -DDEBUG  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+uart/UART.o: ../uart/UART.c
 	@echo Building file: $<
 	@echo Invoking: XC8 C Compiler : 2.36
 	$(QUOTE)C:\Program Files (x86)\Microchip\xc8\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega328P  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega328P__ -DDEBUG  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

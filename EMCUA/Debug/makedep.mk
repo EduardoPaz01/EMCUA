@@ -10,3 +10,5 @@ ihm\LCD.c
 
 sensor\sensor.c
 
+uart\UART.c
+
