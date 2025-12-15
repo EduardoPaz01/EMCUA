@@ -65,7 +65,13 @@ uint8_t parseCommand(char *cmd);
 uint8_t uartCommandTask(void);
 
 /**
+ * Send a NUL-terminated string over UART followed by CR+LF.
  *
+ * Transmits the provided string one character at a time using
+ * `uartSendChar()` and appends a carriage-return and line-feed
+ * sequence to terminate the line.
+ *
+ * @param s Pointer to a NUL-terminated C string to be transmitted.
  */
 void uartSendString(const char *s);
 

@@ -179,20 +179,43 @@ void setRPM_REF(uint16_t ref);
 uint8_t getDuty(void);
 
 /**
+ * Set open-loop PWM reference duty.
  *
+ * Stores the desired duty reference used by the open-loop routines
+ * (ramp/step). The value is interpreted as percentage (0-100).
+ *
+ * @param duty_ref_ Duty reference percentage (0..100).
  */
 void setPWM_Ref(uint8_t duty_ref_);
 
 /**
+ * Set the open-loop PWM step increment.
  *
+ * Controls how much the applied duty changes each call to
+ * `applyPWM_Ref()` when moving toward the stored reference.
+ *
+ * @param duty_step_ Step increment in percentage points (typically 1..100).
  */
 void setStepPWM(uint8_t duty_step_);
 
 /**
+ * Gradually adjust and apply PWM toward the stored reference.
  *
+ * This function should be called periodically. It moves the current
+ * duty toward `duty_ref` by `duty_step` and applies the resulting
+ * PWM output (uses clockwise direction in open-loop mode).
  */
 void applyPWM_Ref(void);
 
+/**
+ * Set the numeric gain multiplier used by the closed-loop controller.
+ *
+ * The value is used to scale the proportional contribution of the PI
+ * controller (useful for coarse tuning). Valid range depends on the
+ * application but is typically 1..255.
+ *
+ * @param GAIN_ Integer gain multiplier (1..255).
+ */
 void setGAIN(uint8_t GAIN_);
 
 // G(s)= 11,87 / 0,054s+1
