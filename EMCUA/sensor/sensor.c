@@ -1,12 +1,16 @@
 #include "sensor.h"
 
-// Global sensor state
+// GLOBAL SENSOR STATE
 volatile unsigned long g_millis = 0;
 unsigned long startMillis = 0;
 uint8_t state = 0;
 uint8_t firstFall = 1;
 unsigned long lastPeriod = 0;
 Sensor_State g_sensor;
+
+ISR(TIMER1_COMPA_vect) {
+  g_millis++;
+}
 
 void sensorInit(void) {
   // Configure LED pin as output
@@ -15,10 +19,10 @@ void sensorInit(void) {
   
   // Configure ADC
   ADMUX = (1 << REFS0)                    // AVCC with external capacitor at AREF pin
-        | (ADC_CHANNEL & 0x0F);           // Select ADC channel
+          |(ADC_CHANNEL & 0x0F);          // Select ADC channel
   
-  ADCSRA = (1 << ADEN)              // Habilita ADC
-          | (1 << ADPS0);           // Prescaler = 2 (mais rápido possível)
+  ADCSRA = (1 << ADEN)                    // Habilita ADC
+           |(1 << ADPS0);                 // Prescaler = 2 (mais rápido possível)
   
   ADCSRB = 0;                             // Free running mode
   
@@ -42,71 +46,26 @@ uint16_t adcRead(void) {
   return ADC;
 }
 
-//util 
-
 unsigned long periodToRPM(unsigned long period_ms) {
-  if (period_ms == 0) return 0; // evita divisão por zero
+  if (period_ms == 0) return 0;               // avoids division by zero
   double freq = 1000.0 / (double)period_ms;   // Hz
   double rpm  = freq * 60.0;                  // RPM
   return (unsigned long)rpm;
 }
 
-
-// temporary 
-
-void uartInit(unsigned long baud) {
-  unsigned int ubrr = F_CPU/16/baud - 1;
-
-  // Configura baud rate
-  UBRR0H = (unsigned char)(ubrr >> 8);
-  UBRR0L = (unsigned char)ubrr;
-
-  // Habilita transmissão
-  UCSR0B = (1 << TXEN0);
-
-  // Frame format: 8 data bits, 1 stop bit, sem paridade (8N1)
-  UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
-}
-
-void uartSendChar(char c) {
-  while (!(UCSR0A & (1 << UDRE0)));
-  UDR0 = c;
-}
-
-void uartSendInt(uint16_t value) {
-  char buf[6];
-  int i = 0;
-
-  do {
-    buf[i++] = (value % 10) + '0';
-    value /= 10;
-  } while (value > 0);
-
-  while (i > 0) {
-    uartSendChar(buf[--i]);
-  }
-
-  uartSendChar('\r');
-  uartSendChar('\n');
-}
-
 void sensorReadAndSend(void) {
-  ADCSRA |= (1 << ADSC);            // Inicia conversão
-  while (ADCSRA & (1 << ADSC));     // Espera terminar
-  uint16_t adcValue = ADC;          // Lê resultado
-  uartSendInt(adcValue);            // Envia pela serial
-}
-
-ISR(TIMER0_COMPA_vect) {
-  g_millis++;
+  ADCSRA |= (1 << ADSC);            // Starts conversion
+  while (ADCSRA & (1 << ADSC));     // Wanting ending
+  uint16_t adcValue = ADC;          // Read
+  uartSendInt(adcValue);            // Send to serial
 }
 
 void millisInit(void) {
-  // Timer0 em modo CTC, interrupção a cada 1ms
-  TCCR0A = (1 << WGM01);
-  TCCR0B = (1 << CS01) | (1 << CS00); // prescaler 64
-  OCR0A = (F_CPU / 64 / 1000) - 1;    // 1ms
-  TIMSK0 = (1 << OCIE0A);
+  // Timer1 in mode CTC, interrupt 1ms
+  TCCR1A = 0;
+  TCCR1B = (1 << WGM12) | (1 << CS11) | (1 << CS10); // CTC, prescaler 64
+  OCR1A = (F_CPU / 64 / 1000) - 1;    // 1ms
+  TIMSK1 = (1 << OCIE1A);
   sei();
 }
 
