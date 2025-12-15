@@ -44,6 +44,7 @@ int main(void){
         rpm = periodToRPM(lastPeriod);
 
         if(OL){ // Open-loop control
+          applyPWM_Ref();
           duty = getDuty();
           //uartSendInt(duty);
           send_LCD_label_value(MA, duty, 1);

@@ -1,5 +1,8 @@
 #include "motor-controller.h"
 
+// GENERAL 
+uint8_t duty = 0;
+
 // CLOSED-LOOP CONTROL
 LogData logBuffer[64];
 float y_rpm = 0.0f;
@@ -11,7 +14,9 @@ float e_prev = 0.0f;
 uint8_t logIndex = 0;
 uint16_t rpm_ref = 400;
 
-uint8_t duty = 0;
+// OPEN-LOOP CONTROL
+uint8_t duty_ref = 0;
+uint8_t duty_step = 1;
 
 // GENERAL
 void motorInit(void){
@@ -102,6 +107,27 @@ void applyPWM(int8_t direction, uint8_t duty_){
 }
 
 // OPEN-LOOP CONTROL
+void setPWM_Ref(uint8_t duty_ref_){
+  duty_ref = duty_ref_;
+}
+void setStepPWM(uint8_t duty_step_){
+  duty_step = duty_step_;
+}
+void applyPWM_Ref(void){
+  int8_t signal = duty_ref - duty;
+
+  if(signal > 0){
+    duty += duty_step;
+    if(duty > duty_ref) duty = duty_ref; // clamp ref function
+  } 
+  else if(signal < 0){
+    duty -= duty_step;
+    if(duty < duty_ref) duty = duty_ref;
+  }
+
+  applyPWM(1, duty);
+}
+
 uint8_t voltageToDuty(float voltage){
   if(voltage > 12.0) voltage = 12.0;
   if(voltage < -12.0) voltage = -12.0;

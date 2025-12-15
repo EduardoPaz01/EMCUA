@@ -19,7 +19,7 @@
  */
  #define DEFAULT_RESPONSE 0
 #define MA_RESPONSE 1
-#define MF_RESPONSE 2
+#define MF_RESPONSE 3
 
 /**
  * @brief Initialize UART peripheral at given baud rate.

@@ -39,7 +39,27 @@ uint8_t parseCommand(char *cmd){
         char tmp[5];
         memcpy(tmp, p, len);
         tmp[len] = '\0';
-        applyPWM(1, atoi(tmp));
+        setPWM_Ref(atoi(tmp));
+      }
+    }
+    retorno = MA_RESPONSE;
+  }
+
+  // SDS.12 -> set duty cycle step to 12
+  // Accept 1 to 2 digits after the dot (e.g., SDO.0 .. SDO.10)
+  else if(strncmp(cmd, "SDS.", 4) == 0){ // Set Duty-cycle in Open-loop
+    char *p = &cmd[4];
+    size_t len = strlen(p);
+    if (len >= 1 && len <= 2) {
+      int valid = 1;
+      for (size_t i = 0; i < len; ++i) {
+        if (!isdigit((unsigned char)p[i])) { valid = 0; break; }
+      }
+      if (valid) {
+        char tmp[5];
+        memcpy(tmp, p, len);
+        tmp[len] = '\0';
+        setStepPWM(atoi(tmp));
       }
     }
     retorno = MA_RESPONSE;
