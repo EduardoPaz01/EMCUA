@@ -193,6 +193,8 @@ void setStepPWM(uint8_t duty_step_);
  */
 void applyPWM_Ref(void);
 
+void setGAIN(uint8_t GAIN_);
+
 // G(s)= 11,87 / 0,054s+1
 // G(z)= 7,17​​  / z−0,396
 // y[k] = 0,396y[k−1] + 7,17u[k−1]

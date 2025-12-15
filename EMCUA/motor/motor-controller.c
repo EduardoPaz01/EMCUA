@@ -13,6 +13,7 @@ float e = 0.0f;
 float e_prev = 0.0f;
 uint8_t logIndex = 0;
 uint16_t rpm_ref = 400;
+uint8_t GAIN = 1;
 
 // OPEN-LOOP CONTROL
 uint8_t duty_ref = 0;
@@ -105,6 +106,9 @@ void applyPWM(int8_t direction, uint8_t duty_){
 
   SREG = sreg;
 }
+uint8_t getDuty(void){
+  return duty;
+}
 
 // OPEN-LOOP CONTROL
 void setPWM_Ref(uint8_t duty_ref_){
@@ -169,7 +173,7 @@ uint8_t applyControl(unsigned long rpm_measured){
 
   // PI 
   u = u_prev 
-      + KP * (e - e_prev) 
+      + KP * GAIN * (e - e_prev) 
       + KI * TS * e;
 
   // Saturation (anti wind-up)
@@ -189,11 +193,10 @@ void storeValues(unsigned long rpm, uint8_t duty){
     logIndex++;
   }
 }
-
 void setRPM_REF(uint16_t ref){
   rpm_ref = ref;
 }
 
-uint8_t getDuty(void){
-  return duty;
+void setGAIN(uint8_t GAIN_){
+  GAIN = GAIN_;
 }

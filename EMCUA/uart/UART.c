@@ -25,6 +25,25 @@ uint8_t parseCommand(char *cmd){
     retorno = MF_RESPONSE;
   }
 
+  // SCG.1234 -> set GAIN  0001 to 0254 (expects exactly 4 digits)
+  else if(strncmp(cmd, "SCG.", 4) == 0){ // Set GAIN
+    char *p = &cmd[4];
+    size_t len = strlen(p);
+    if (len >= 1 && len <= 2) {
+      int valid = 1;
+      for (size_t i = 0; i < len; ++i) {
+        if (!isdigit((unsigned char)p[i])) { valid = 0; break; }
+      }
+      if (valid) {
+        char tmp[5];
+        memcpy(tmp, p, len);
+        tmp[len] = '\0';
+        setGAIN(atoi(tmp));
+      }
+    }
+    retorno = MF_RESPONSE;
+  }
+
   // SDO.12 -> set duty cycle reference to 12
   // Accept 1 to 2 digits after the dot (e.g., SDO.0 .. SDO.10)
   else if(strncmp(cmd, "SDO.", 4) == 0){ // Set Duty-cycle in Open-loop
